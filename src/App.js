@@ -1,24 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import {Routes, Route} from 'react-router-dom';
+import { Login } from './pages/login';
+import { Landing } from './pages/landing';
+import { SignUp } from './pages/signup';
+import Cookies from 'js-cookie';
+import { ToastContainer } from 'react-toastify';
+import { ProtectedRoute } from './components/protectedRoute';
+import { Party } from './pages/Party_Room';
+import { Gallery } from './pages/gallery'; 
+import { VIP } from './pages/VIP'; 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <ToastContainer/>
+        <Routes>
+      <Route path = "/login" element = {<Login/>}/>
+      <Route path = "/" element = {<Landing/>}/>
+      <Route path = "/signup" element = {<SignUp/>}/> 
+      <Route path = "/gallery" element = {<Gallery/>}/>
+      <Route path = "/party" element = {<Party/>}/>
+      <Route path = "/vip" element = {<VIP/>}/>
+      <Route element={<ProtectedRoute session={Cookies.get("Session_Event")}/>}>
+        <Route/>
+      </Route>
+        </Routes> 
+   
+
+
+    </>
   );
 }
 
